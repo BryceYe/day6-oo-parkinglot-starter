@@ -9,6 +9,13 @@ public class ParkingLot {
 
     private Integer capacity = 10;
 
+    public ParkingLot(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public ParkingLot() {
+    }
+
     public Ticket park(Car car) {
         return IntStream.rangeClosed(1, capacity).boxed()
             .filter(position -> ticketsCars.keySet().stream().noneMatch(ticket -> ticket.getPosition().equals(position)))

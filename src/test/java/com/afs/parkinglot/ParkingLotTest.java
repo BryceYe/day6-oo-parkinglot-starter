@@ -63,5 +63,17 @@ public class ParkingLotTest {
         assertFalse(car.equals(fetchCarTwice));
     }
 
+    @Test
+    public void should_return_nothing_when_no_position(){
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car("ABC100");
+        Ticket ticket = parkingLot.park(car);
+
+        Car car2 = new Car("ABC200");
+        Ticket ticket2 = parkingLot.park(car2);
+
+        assertNull(ticket2);
+    }
+
 
 }
