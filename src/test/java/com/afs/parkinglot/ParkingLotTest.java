@@ -31,7 +31,7 @@ public class ParkingLotTest {
 
     //Case 2 - Given a parking lot with a parked car, and a parking ticket, When fetch the car, Then return the parked car.
     @Test
-    public void should_return_ticket_when_customer_parked_the_car(){
+    public void should_return_parked_car_when_customer_parked_the_car(){
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1));
 
@@ -43,7 +43,7 @@ public class ParkingLotTest {
 
     //Case 3 - Given a parking lot with two parked cars, and two parking tickets, When fetch the car twice, Then return the right car with each ticket
     @Test
-    public void should_return_two_tickets_when_customer_parked_two_car(){
+    public void should_return_right_car_when_customer_parked_two_car(){
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1));
 
@@ -150,9 +150,9 @@ public class ParkingLotTest {
         assertTrue(outputStream.toString().contains("No available position."));
     }
 
-    //Case 10 - Given two parking lot and only the second parking lot have position, and a car, When park the car, Then return the right car with each ticket
+    //Case 10 - Given two parking lot and only the second parking lot have position, and a car, When fetch the car, Then return the parked car.
     @Test
-    public void should_return_right_ticket_when_only_second_parking_lot_have_position(){
+    public void should_return_parked_car_when_only_the_second_parking_lot_have_position(){
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1,1));
         parkingLots.add(new ParkingLot(2,1));
