@@ -150,4 +150,24 @@ public class ParkingLotTest {
         assertTrue(outputStream.toString().contains("No available position."));
     }
 
+    //Case 10 - Given two parking lot and only the second parking lot have position, and a car, When park the car, Then return the right car with each ticket
+    @Test
+    public void should_return_right_ticket_when_only_second_parking_lot_have_position(){
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1,1));
+        parkingLots.add(new ParkingLot(2,1));
+
+
+        Car car = new Car("ABC100");
+        Ticket ticket = ParkingBoy.park(parkingLots, car);
+
+        Car car2 = new Car("ABC200");
+        Ticket ticket2 = ParkingBoy.park(parkingLots, car2);
+
+        Car fetchCar = ParkingBoy.fetch(parkingLots, ticket2);
+
+        assertTrue(car2.equals(fetchCar));
+        assertTrue(parkingLots.get(1).equals(ticket2.getParkingLot()));
+    }
+
 }

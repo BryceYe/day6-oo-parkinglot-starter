@@ -2,6 +2,7 @@ package com.afs.parkinglot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class ParkingLot {
@@ -10,6 +11,18 @@ public class ParkingLot {
     private Integer capacity = 10;
 
     private Integer id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ParkingLot that = (ParkingLot) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
     public ParkingLot(Integer id) {
         this.id = id;
