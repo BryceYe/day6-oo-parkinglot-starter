@@ -24,10 +24,16 @@ public class ParkingLot {
                 Ticket ticket = new Ticket(car, position, this);
                 ticketsCars.put(ticket, car);
                 return ticket;
-            }).orElse(null);
+            }).orElseGet(() -> {
+                System.out.println("No available position.");
+                return null;
+            });
     }
 
     public Car fetch(Ticket ticket) {
+        if(!ticketsCars.containsKey(ticket)) {
+            System.out.println("Unrecognized parking ticket.");
+        }
         return ticketsCars.remove(ticket);
     }
 }

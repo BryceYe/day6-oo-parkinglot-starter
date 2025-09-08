@@ -1,11 +1,22 @@
 package com.afs.parkinglot;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+    @BeforeEach
+    void setUp() {
+        System.setOut(new PrintStream(outputStream));
+    }
+
     @Test
     public void should_return_ticket_when_customer_parking_the_car(){
         ParkingLot parkingLot = new ParkingLot();
@@ -74,6 +85,20 @@ public class ParkingLotTest {
 
         assertNull(ticket2);
     }
+
+    //Case 7 - Given a parking lot, and a wrong ticket, When fetch the car, Then return error message "Unrecognized parking ticket."
+    @Test
+    public void should_return_error_message_when_customer_give_the_wrong_ticket(){
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car("ABC100");
+        Ticket ticket = parkingLot.park(car);
+
+        Ticket wrongTicket = new Ticket(new Car("ABC200"), 10, parkingLot);
+        Car fetchCar = parkingLot.fetch(wrongTicket);
+
+        assertTrue(outputStream.toString().contains("Unrecognized parking ticket."));
+    }
+
 
 
 }
