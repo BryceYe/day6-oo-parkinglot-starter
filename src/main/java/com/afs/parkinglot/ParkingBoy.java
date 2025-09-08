@@ -1,29 +1,35 @@
 package com.afs.parkinglot;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class ParkingBoy {
-    // 第一个停车场停满了才会第二个，按顺序
 
-    public static Ticket park(ParkingLot parkingLot,Car car) {
-        return IntStream.rangeClosed(1, parkingLot.getCapacity()).boxed()
-                .filter(position -> parkingLot.getTicketsCars().keySet().stream().noneMatch(ticket -> ticket.getPosition().equals(position)))
+    public static Ticket park(List<ParkingLot> parkingLots, Car car) {
+        for(ParkingLot parkingLot : parkingLots){
+            Ticket ticket = IntStream.rangeClosed(1, parkingLot.getCapacity()).boxed()
+                .filter(position -> parkingLot.getTicketsCars().keySet().stream().noneMatch(t1 -> t1.getPosition().equals(position)))
                 .findFirst()
                 .map(position -> {
-                    Ticket ticket = new Ticket(car, position, parkingLot);
-                    parkingLot.getTicketsCars().put(ticket, car);
-                    return ticket;
-                }).orElseGet(() -> {
-                    System.out.println("No available position.");
-                    return null;
-                });
+                    Ticket t = new Ticket(car, position, parkingLot);
+                    parkingLot.getTicketsCars().put(t, car);
+                    return t;
+                }).orElse(null);
+            if(ticket != null){
+                return ticket;
+            }
+        }
+        System.out.println("No available position.");
+        return null;
     }
 
-    public static Car fetch(ParkingLot parkingLot,Ticket ticket) {
-        if(!parkingLot.getTicketsCars().containsKey(ticket)) {
+    public static Car fetch(List<ParkingLot> parkingLots,Ticket ticket) {
+        if(parkingLots.isEmpty() ||
+                !parkingLots.contains(ticket.getParkingLot()) ||
+                !parkingLots.get(parkingLots.indexOf(ticket.getParkingLot())).getTicketsCars().containsKey(ticket)){
             System.out.println("Unrecognized parking ticket.");
             return null;
         }
-        return parkingLot.getTicketsCars().remove(ticket);
+        return parkingLots.get(parkingLots.indexOf(ticket.getParkingLot())).getTicketsCars().remove(ticket);
     }
 }

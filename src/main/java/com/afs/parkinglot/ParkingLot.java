@@ -9,11 +9,18 @@ public class ParkingLot {
 
     private Integer capacity = 10;
 
-    public ParkingLot(Integer capacity) {
-        this.capacity = capacity;
+    private Integer id;
+
+    public ParkingLot(Integer id) {
+        this.id = id;
     }
 
     public ParkingLot() {
+    }
+
+    public ParkingLot(Integer id, Integer capacity) {
+        this.capacity = capacity;
+        this.id = id;
     }
 
     public Map<Ticket, Car> getTicketsCars() {
@@ -30,5 +37,13 @@ public class ParkingLot {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
