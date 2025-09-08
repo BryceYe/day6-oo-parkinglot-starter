@@ -170,4 +170,21 @@ public class ParkingLotTest {
         assertTrue(parkingLots.get(1).equals(ticket2.getParkingLot()));
     }
 
+    //Case 11 - Given two parking lot and the first parking lot have position, and a car, When fetch the car, Then return the parked car.
+    @Test
+    public void should_return_parked_car_when_the_first_parking_lot_have_position(){
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1,1));
+        parkingLots.add(new ParkingLot(2,1));
+
+
+        Car car = new Car("ABC100");
+        Ticket ticket = ParkingBoy.park(parkingLots, car);
+
+        Car fetchCar = ParkingBoy.fetch(parkingLots, ticket);
+
+        assertTrue(car.equals(fetchCar));
+        assertTrue(parkingLots.get(0).equals(ticket.getParkingLot()));
+    }
+
 }
