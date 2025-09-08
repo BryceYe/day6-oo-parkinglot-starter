@@ -26,10 +26,10 @@ public class ParkingBoy {
     public static Car fetch(List<ParkingLot> parkingLots,Ticket ticket) {
         if(parkingLots.isEmpty() ||
                 !parkingLots.contains(ticket.getParkingLot()) ||
-                !parkingLots.get(parkingLots.indexOf(ticket.getParkingLot())).getTicketsCars().containsKey(ticket)){
+                !ticket.getParkingLot().getTicketsCars().containsKey(ticket)){
             System.out.println("Unrecognized parking ticket.");
             return null;
         }
-        return parkingLots.get(parkingLots.indexOf(ticket.getParkingLot())).getTicketsCars().remove(ticket);
+        return ticket.getParkingLot().getTicketsCars().remove(ticket);
     }
 }
