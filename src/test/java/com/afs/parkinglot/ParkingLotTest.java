@@ -51,4 +51,17 @@ public class ParkingLotTest {
         assertFalse(car.equals(fetchCar));
     }
 
+    @Test
+    public void should_return_nothing_when_customer_give_the_used_ticket(){
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car("ABC100");
+        Ticket ticket = parkingLot.park(car);
+        Car fetchCar = parkingLot.fetch(ticket);
+
+        Car fetchCarTwice = parkingLot.fetch(ticket);
+
+        assertFalse(car.equals(fetchCarTwice));
+    }
+
+
 }
