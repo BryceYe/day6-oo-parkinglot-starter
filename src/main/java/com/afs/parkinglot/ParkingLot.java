@@ -16,25 +16,19 @@ public class ParkingLot {
     public ParkingLot() {
     }
 
-    public Ticket park(Car car) {
-        return IntStream.rangeClosed(1, capacity).boxed()
-            .filter(position -> ticketsCars.keySet().stream().noneMatch(ticket -> ticket.getPosition().equals(position)))
-            .findFirst()
-            .map(position -> {
-                Ticket ticket = new Ticket(car, position, this);
-                ticketsCars.put(ticket, car);
-                return ticket;
-            }).orElseGet(() -> {
-                System.out.println("No available position.");
-                return null;
-            });
+    public Map<Ticket, Car> getTicketsCars() {
+        return ticketsCars;
     }
 
-    public Car fetch(Ticket ticket) {
-        if(!ticketsCars.containsKey(ticket)) {
-            System.out.println("Unrecognized parking ticket.");
-            return null;
-        }
-        return ticketsCars.remove(ticket);
+    public void setTicketsCars(Map<Ticket, Car> ticketsCars) {
+        this.ticketsCars = ticketsCars;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 }
