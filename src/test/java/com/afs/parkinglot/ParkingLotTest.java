@@ -112,6 +112,19 @@ public class ParkingLotTest {
         assertTrue(outputStream.toString().contains("Unrecognized parking ticket."));
     }
 
+    //Case 9 - Given a parking lot without any position, and a car, When park the car, Then return error message "No available position."
+    @Test
+    public void should_return_error_message_when_without_any_position(){
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car("ABC100");
+        Ticket ticket = parkingLot.park(car);
+
+        Car car2 = new Car("ABC200");
+        Ticket ticket2 = parkingLot.park(car2);
+
+        assertTrue(outputStream.toString().contains("No available position."));
+    }
+
 
 
 }
