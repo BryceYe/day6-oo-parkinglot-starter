@@ -33,6 +33,7 @@ public class ParkingLot {
     public Car fetch(Ticket ticket) {
         if(!ticketsCars.containsKey(ticket)) {
             System.out.println("Unrecognized parking ticket.");
+            return null;
         }
         return ticketsCars.remove(ticket);
     }
