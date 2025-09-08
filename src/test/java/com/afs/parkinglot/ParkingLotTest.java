@@ -99,6 +99,19 @@ public class ParkingLotTest {
         assertTrue(outputStream.toString().contains("Unrecognized parking ticket."));
     }
 
+    //Case 8 - Given a parking lot, and a used ticket, When fetch the car, Then return error message "Unrecognized parking ticket."
+    @Test
+    public void should_return_error_message_when_customer_give_the_used_ticket(){
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car("ABC100");
+        Ticket ticket = parkingLot.park(car);
+        Car fetchCar = parkingLot.fetch(ticket);
+
+        Car fetchCarTwice = parkingLot.fetch(ticket);
+
+        assertTrue(outputStream.toString().contains("Unrecognized parking ticket."));
+    }
+
 
 
 }
